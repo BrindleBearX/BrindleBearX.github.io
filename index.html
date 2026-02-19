@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI IT Helpdesk Demo</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input, textarea {
+            width: 300px;
+            padding: 10px;
+            margin: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #0078D4;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>AI IT Helpdesk Portal</h1>
+<p>Submit your IT issue (Power Platform + API Demo)</p>
+
+<textarea id="ticket" placeholder="Describe your IT issue..."></textarea><br>
+<button onclick="sendTicket()">Submit Ticket</button>
+
+<p id="response"></p>
+
+<script>
+async function sendTicket() {
+    const ticket = document.getElementById("ticket").value;
+
+    const response = await fetch("YOUR_POWER_AUTOMATE_URL", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ issue: ticket })
+    });
+
+    const data = await response.text();
+    document.getElementById("response").innerText = data;
+}
+</script>
+
+</body>
+</html>
